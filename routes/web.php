@@ -18,4 +18,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::group(['prefix' => 'messaging', 'namespace' => 'Admin'],function(){
+        Route::get('/', 'MessagingController@index')->name('admin.messaging');
+    });
 });
