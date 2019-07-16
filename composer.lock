@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "43458863eed822c11ea3608c97bc164a",
@@ -1022,7 +1022,7 @@
             ],
             "description": "This hook is to generate voyager-only migration for laravel app",
             "homepage": "https://github.com/mohammed-io/generate-migrations-hook",
-            "time": "2019-07-08T03:07:06+00:00"
+            "time": "2019-07-09T07:07:55+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
