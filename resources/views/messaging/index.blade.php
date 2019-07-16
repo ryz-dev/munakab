@@ -87,122 +87,40 @@
                     <div class="panel-body">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1primary">
-                                <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
-                                    <div class="info-block block-info clearfix">
-                                        <div class="square-box pull-left">
-                                            <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+                                @foreach ($pengaduan as $item)
+                                    <a href="{{ route('admin.messaging.read',[$item->id]) }}" style="text-decoration: none;color:#333">
+                                        <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
+
+                                            <div class="info-block {{ $item->read_status==0?'block-info':'' }} clearfix">
+                                                <div class="square-box pull-left">
+                                                    <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+                                                </div>
+                                                <table>
+                                                    <tr>
+                                                        <td width='150'><strong>Nama Pengirim</strong></td>
+                                                        <td width='15'>:</td>
+                                                        <td>{{ $item->fullname }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Title</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->subject }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Kontak</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->phone .'/ '. $item->email }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Isi Pesan</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->message }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <table>
-                                            <tr>
-                                                <td><strong>Nama Pengirim</strong></td>
-                                                <td>:</td>
-                                                <td>Muh. Zulkifli R</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Title</strong></td>
-                                                <td>:</td>
-                                                <td>Saran dan kritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Kontak</strong></td>
-                                                <td>:</td>
-                                                <td>555-555-5555/Email: sample@company.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Isi Pesan</strong></td>
-                                                <td>:</td>
-                                                <td>Salam spartan</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
-                                    <div class="info-block block-info clearfix">
-                                        <div class="square-box pull-left">
-                                            <span class="glyphicon glyphicon-user glyphicon-lg"></span>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <td><strong>Nama Pengirim</strong></td>
-                                                <td>:</td>
-                                                <td>Muh. Zulkifli R</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Title</strong></td>
-                                                <td>:</td>
-                                                <td>Saran dan kritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Kontak</strong></td>
-                                                <td>:</td>
-                                                <td>555-555-5555/Email: sample@company.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Isi Pesan</strong></td>
-                                                <td>:</td>
-                                                <td>Salam spartan</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
-                                    <div class="info-block block-info clearfix">
-                                        <div class="square-box pull-left">
-                                            <span class="glyphicon glyphicon-user glyphicon-lg"></span>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <td><strong>Nama Pengirim</strong></td>
-                                                <td>:</td>
-                                                <td>Muh. Zulkifli R</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Title</strong></td>
-                                                <td>:</td>
-                                                <td>Saran dan kritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Kontak</strong></td>
-                                                <td>:</td>
-                                                <td>555-555-5555/Email: sample@company.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Isi Pesan</strong></td>
-                                                <td>:</td>
-                                                <td>Salam spartan</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
-                                    <div class="info-block block-info clearfix">
-                                        <div class="square-box pull-left">
-                                            <span class="glyphicon glyphicon-user glyphicon-lg"></span>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <td><strong>Nama Pengirim</strong></td>
-                                                <td>:</td>
-                                                <td>Muh. Zulkifli R</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Title</strong></td>
-                                                <td>:</td>
-                                                <td>Saran dan kritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Kontak</strong></td>
-                                                <td>:</td>
-                                                <td>555-555-5555/Email: sample@company.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Isi Pesan</strong></td>
-                                                <td>:</td>
-                                                <td>Salam spartan</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                                    </a>
+                                @endforeach
                             </div>
                             <div class="tab-pane fade" id="tab2primary">Primary 2</div>
                         </div>
