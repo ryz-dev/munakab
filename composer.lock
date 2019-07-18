@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43458863eed822c11ea3608c97bc164a",
+    "content-hash": "c426dd9ddbee9bb064c2a584b5bb1afb",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -1022,7 +1022,7 @@
             ],
             "description": "This hook is to generate voyager-only migration for laravel app",
             "homepage": "https://github.com/mohammed-io/generate-migrations-hook",
-            "time": "2019-07-09T07:07:55+00:00"
+            "time": "2019-07-08T03:07:06+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -2106,6 +2106,54 @@
                 "type"
             ],
             "time": "2015-07-25T16:39:46+00:00"
+        },
+        {
+            "name": "protoqol/prequel",
+            "version": "1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Protoqol/Prequel.git",
+                "reference": "93a401f01f9e7024f9e5105d1764fa663e2b1c55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Protoqol/Prequel/zipball/93a401f01f9e7024f9e5105d1764fa663e2b1c55",
+                "reference": "93a401f01f9e7024f9e5105d1764fa663e2b1c55",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.6",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.7",
+                "phpmd/phpmd": "^2.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Protoqol\\Prequel\\PrequelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Protoqol\\Prequel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quinten Schorsij",
+                    "email": "quinten@protoqol.xyz"
+                }
+            ],
+            "description": "Clear and concise database management.",
+            "time": "2019-07-17T01:59:18+00:00"
         },
         {
             "name": "psr/container",
