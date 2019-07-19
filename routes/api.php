@@ -23,13 +23,14 @@ Route::group(['namespace' => 'Api'], function(){
     });
 
     Route::group(['prefix' => 'pages'], function(){
-        Route::get('/', 'PagesController@index')->name('api.pages');
-        Route::get('/read', 'PagesController@index')->name('api.pages.read');
+        Route::get('/read', 'PagesController@read')->name('api.pages.read');
     });
 
     Route::group(['prefix' => 'post'], function(){
         Route::get('/', 'PostController@index')->name('api.post.index');
         Route::get('/category', 'PostController@category')->name('api.post.category');
+        Route::get('/read', 'PostController@read')->name('api.post.read');
+        Route::get('/related', 'PostController@related')->name('api.post.related');
     });
 
     Route::group(['prefix' => 'opd'], function(){
