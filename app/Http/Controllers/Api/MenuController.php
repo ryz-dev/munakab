@@ -45,11 +45,8 @@ class MenuController extends Controller
             }
         });
 
-        return $menus->parent_items->sortBy('order')->values()->toArray();
-
-
-
-        // return $menus;
+        $menus = $menus->parent_items->sortBy('order')->values()->toArray();
+        return apiResponse(200, $menus);
     }
 
     public function customUrl($route,$parameters){
