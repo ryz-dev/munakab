@@ -92,3 +92,25 @@ if (!function_exists('databaseExceptionError')) {
         return apiResponse(502,false,$message);
     }
 }
+
+if (!function_exists('responseImage')) {
+    function responseImage($data){
+        if ($data) {
+            return asset($data);
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('getUserNameById')) {
+    function getUserNameById($data){
+        return \DB::table('users')->where('id', $data)->first()->name;
+    }
+}
+
+if (!function_exists('getUserPictureById')) {
+    function getUserPictureById($data){
+        return asset(\DB::table('users')->where('id', $data)->first()->avatar);
+    }
+}
