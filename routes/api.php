@@ -26,6 +26,14 @@ Route::group(['namespace' => 'Api'], function(){
         Route::get('/read', 'PagesController@read')->name('api.pages.read');
     });
 
+    Route::group(['prefix' => 'download'], function(){
+        Route::get('/', 'DownloadController@index')->name('api.download.index');
+    });
+
+    Route::group(['prefix' => 'slider'], function(){
+        Route::get('/', 'SliderController@index')->name('api.slider.index');
+    });
+
     Route::group(['prefix' => 'post'], function(){
         Route::get('/', 'PostController@index')->name('api.post.index');
         Route::get('/category', 'PostController@category')->name('api.post.category');
