@@ -9,6 +9,7 @@ use TCG\Voyager\Facades\Voyager;
 class Opd extends Model
 {
     protected $table= 'opd';
+    protected $fillable = ['category_id','user_id','user_opd'];
 
     public function authorId()
     {
