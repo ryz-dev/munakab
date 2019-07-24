@@ -118,11 +118,54 @@
                                                     </tr>
                                                 </table>
                                             </div>
+                                            <div class="row text-right">
+                                                <button class="btn btn-info">Balas</button>
+                                                <button class="btn btn-danger">Hapus</button>
+                                            </div>
                                         </div>
                                     </a>
                                 @endforeach
                             </div>
-                            <div class="tab-pane fade" id="tab2primary">Primary 2</div>
+                            <div class="tab-pane fade" id="tab2primary">
+                                @foreach ($saran as $item)
+                                    <a href="{{ route('admin.messaging.read',[$item->id]) }}" style="text-decoration: none;color:#333">
+                                        <div class="items col-xs-12 col-sm-6 col-md-12 col-lg-12 clearfix">
+
+                                            <div class="info-block {{ $item->read_status==0?'block-info':'' }} clearfix">
+                                                <div class="square-box pull-left">
+                                                    <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+                                                </div>
+                                                <table>
+                                                    <tr>
+                                                        <td width='150'><strong>Nama Pengirim</strong></td>
+                                                        <td width='15'>:</td>
+                                                        <td>{{ $item->fullname }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Title</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->subject }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Kontak</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->phone .'/ '. $item->email }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Isi Pesan</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{ $item->message }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="row text-right" >
+                                                <button class="btn btn-info">Balas</button>
+                                                <button class="btn btn-danger">Hapus</button>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

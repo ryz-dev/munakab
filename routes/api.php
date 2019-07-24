@@ -30,6 +30,11 @@ Route::group(['namespace' => 'Api'], function(){
         Route::get('/', 'DownloadController@index')->name('api.download.index');
     });
 
+    Route::group(['prefix' => 'message'], function(){
+        Route::post('/pengaduan', 'MessageController@pengaduan')->name('api.message.pengaduan');
+        Route::post('/saran', 'MessageController@saran')->name('api.message.saran');
+    });
+
     Route::group(['prefix' => 'slider'], function(){
         Route::get('/', 'SliderController@index')->name('api.slider.index');
     });

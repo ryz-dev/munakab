@@ -22,7 +22,6 @@ class MessagingController extends Controller
         $message->read_status = true;
 
         $message->save();
-        // dd($message);
-        // return view('messaging.read');
+        return redirect(route('admin.messaging'));
     }
 }
