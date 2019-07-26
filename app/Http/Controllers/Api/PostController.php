@@ -8,13 +8,30 @@ use TCG\Voyager\Facades\Voyager;
 
 class PostController extends Controller
 {
+
+    protected $perPage = 10;
+
+
     public function index(Request $request)
     {
-        // $post = app()->make(Voyager::modelClass('Post'));
+        $post = app()->make(Voyager::modelClass('Post'));
         // if ($request->has('category')) {
         //     $post->where('')
         // }
-        // dd($post->all()->toArray());
+        $post = $post->published()->orderBy('created_at','DESC')->paginate($this->perPage);
+
+        $post->getCollection()->transform(function($value){
+            $value['author'] = \DB::table('users')->where('id', $value->author_id)->first()->name;
+            $value['image'] = asset($value->image);
+            $category = \DB::table('categories')->where('id', $value['category_id']);
+            $value['category'] = $category->first()?$category->first()->name:null;
+            unset($value['author_id']);
+            unset($value['id']);
+            unset($value['category_id']);
+            return $value;
+        });
+
+        return apiResponse(200,$post);
     }
 
     public function category(Request $request)
@@ -23,13 +40,21 @@ class PostController extends Controller
         $category = $request->category;
 
         $category_id = \DB::table('categories')->where('name', $category);
-        if ($category_id->first()) {
-            $post = $post->where('category_id', $category_id->first()->id)->get();
 
-            $post = $post->map(function($value, $key) use ($category) {
+        if ($category_id->first()) {
+            $post = $post->where('category_id', $category_id->first()->id)
+                ->published()
+                ->orderBy('created_at','DESC')
+                ->paginate($this->perPage)
+                ->withPath(route('api.post.category').'?category='.$category);
+
+            $post->getCollection()->transform(function($value) use ($category) {
                 $value['author'] = \DB::table('users')->where('id', $value->author_id)->first()->name;
                 $value['image'] = asset($value->image);
                 $value['category'] = $category;
+                unset($value['author_id']);
+                unset($value['id']);
+                unset($value['category_id']);
                 return $value;
             });
 
@@ -52,6 +77,8 @@ class PostController extends Controller
             $post['image'] = asset($post['image']);
             $post['author'] = \DB::table('users')->where('id', $post['author_id'])->first()->name;
             unset($post['author_id']);
+            unset($post['id']);
+            unset($post['category_id']);
             $category = \DB::table('categories')->where('id', $post['category_id']);
             $post['category'] = $category->first()?$category->first()->name:null;
             return apiResponse(200, $post);
@@ -76,6 +103,8 @@ class PostController extends Controller
                 $value['image'] = asset($value['image']);
                 $value['author'] = \DB::table('users')->where('id', $value['author_id'])->first()->name;
                 unset($value['author_id']);
+                unset($value['id']);
+                unset($value['category_id']);
                 $category = \DB::table('categories')->where('id', $value['category_id']);
                 $value['category'] = $category->first()?$category->first()->name:null;
                 return $value;
@@ -87,5 +116,26 @@ class PostController extends Controller
         else{
             return apiResponse(404,false,'Post tidak ditemukan');
         }
+    }
+
+    public function featured()
+    {
+        $post = app()->make(Voyager::modelClass('Post'));
+
+        $post = $post->published()
+                    ->where('featured', '=',true)
+                    ->take(3)
+                    ->orderBy('created_at','DESC')
+                    ->get()->map(function($value){
+                        $value['image'] = asset($value['image']);
+                        $value['author'] = \DB::table('users')->where('id', $value['author_id'])->first()->name;
+                        unset($value['author_id']);
+                        unset($value['id']);
+                        unset($value['category_id']);
+                        $category = \DB::table('categories')->where('id', $value['category_id']);
+                        $value['category'] = $category->first()?$category->first()->name:null;
+                        return $value;
+                    });
+        return apiResponse(200,$post);
     }
 }
