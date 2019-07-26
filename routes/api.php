@@ -44,6 +44,7 @@ Route::group(['namespace' => 'Api'], function(){
         Route::get('/category', 'PostController@category')->name('api.post.category');
         Route::get('/read', 'PostController@read')->name('api.post.read');
         Route::get('/related', 'PostController@related')->name('api.post.related');
+        Route::get('/featured', 'PostController@featured')->name('api.post.featured');
     });
 
     Route::group(['prefix' => 'opd'], function(){
