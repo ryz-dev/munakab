@@ -78,11 +78,12 @@ class PostController extends Controller
             $post = $post->first()->toArray();
             $post['image'] = asset($post['image']);
             $post['author'] = \DB::table('users')->where('id', $post['author_id'])->first()->name;
+            // dd($post['category_id']);
+            $category = \DB::table('categories')->where('id', $post['category_id']);
+            $post['category'] = $category->first()?$category->first()->name:null;
             unset($post['author_id']);
             unset($post['id']);
             unset($post['category_id']);
-            $category = \DB::table('categories')->where('id', $post['category_id']);
-            $post['category'] = $category->first()?$category->first()->name:null;
             return apiResponse(200, $post);
         }
         else{
@@ -104,11 +105,11 @@ class PostController extends Controller
             $related = $related->where('category_id', $post['category_id'])->where('id','!=', $post['id'])->take(3)->get()->map(function($value){
                 $value['image'] = asset($value['image']);
                 $value['author'] = \DB::table('users')->where('id', $value['author_id'])->first()->name;
+                $category = \DB::table('categories')->where('id', $value['category_id']);
+                $value['category'] = $category->first()?$category->first()->name:null;
                 unset($value['author_id']);
                 unset($value['id']);
                 unset($value['category_id']);
-                $category = \DB::table('categories')->where('id', $value['category_id']);
-                $value['category'] = $category->first()?$category->first()->name:null;
                 return $value;
             });
 
@@ -131,11 +132,11 @@ class PostController extends Controller
                     ->get()->map(function($value){
                         $value['image'] = asset($value['image']);
                         $value['author'] = \DB::table('users')->where('id', $value['author_id'])->first()->name;
+                        $category = \DB::table('categories')->where('id', $value['category_id']);
+                        $value['category'] = $category->first()?$category->first()->name:null;
                         unset($value['author_id']);
                         unset($value['id']);
                         unset($value['category_id']);
-                        $category = \DB::table('categories')->where('id', $value['category_id']);
-                        $value['category'] = $category->first()?$category->first()->name:null;
                         return $value;
                     });
         return apiResponse(200,$post);
