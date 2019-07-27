@@ -17,7 +17,7 @@ class MenuController extends Controller
         }])->first();
 
         $menus->parent_items->map(function($value){
-            self::unsetParam($value);
+
             if ($value->children->count()) {
                 $value->children->map(function($value){
                     self::unsetParam($value);
@@ -51,6 +51,7 @@ class MenuController extends Controller
 
                 });
             }
+            self::unsetParam($value);
         });
 
         $menus = $menus->parent_items->sortBy('order')->values()->toArray();
