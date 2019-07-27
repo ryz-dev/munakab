@@ -39,13 +39,15 @@ class PostController extends Controller
         $post = app()->make(Voyager::modelClass('Post'));
         $category = $request->category;
 
+        $limit = $request->has('limit')?$request->limit:$this->perPage;
+
         $category_id = \DB::table('categories')->where('name', $category);
 
         if ($category_id->first()) {
             $post = $post->where('category_id', $category_id->first()->id)
                 ->published()
                 ->orderBy('created_at','DESC')
-                ->paginate($this->perPage)
+                ->paginate($limit)
                 ->withPath(route('api.post.category').'?category='.$category);
 
             $post->getCollection()->transform(function($value) use ($category) {

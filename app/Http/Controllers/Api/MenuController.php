@@ -16,11 +16,11 @@ class MenuController extends Controller
             $q->orderBy('order');
         }])->first();
 
-
         $menus->parent_items->map(function($value){
+            self::unsetParam($value);
             if ($value->children->count()) {
                 $value->children->map(function($value){
-
+                    self::unsetParam($value);
                     if ($value->route == 'api.opd.category') {
                         $opd = new Opd();
                         $category = app()->make(Voyager::modelClass('Category'));
@@ -36,6 +36,14 @@ class MenuController extends Controller
 
                     if ($value->route && $value->url =="") {
                         // dd($value->parameters);
+                        // self::unsetParam($value);
+                        // unset($value['id']);
+                        // unset($value['menu_id']);
+                        // unset($value['icon_class']);
+                        // unset($value['color']);
+                        // unset($value['created_at']);
+                        // unset($value['updated_at']);
+                        // dd($value);
                         $value->url = $this->customUrl($value->route, $value->parameters);
 
                         return $value;
@@ -54,5 +62,15 @@ class MenuController extends Controller
             return route($route,(array) $parameters);
         }
         return route($route,$parameters);
+    }
+
+    private static function unsetParam($item){
+        unset($item['menu_id']);
+        unset($item['icon_class']);
+        unset($item['color']);
+        unset($item['created_at']);
+        unset($item['updated_at']);
+        unset($item['route']);
+        unset($item['parameters']);
     }
 }

@@ -27,6 +27,22 @@ class PagesController extends Controller
         else{
             return apiResponse(404,false);
         }
+    }
 
+    public function tentang()
+    {
+        $pages = app()->make(Voyager::modelClass('Page'));
+        $pages = $pages->where('slug','=','tentang');
+        if ($pages->first()) {
+            $pages = $pages->first()->toArray();
+            unset($pages['id']);
+            unset($pages['author_id']);
+            unset($pages['status']);
+            $pages['image'] = asset($pages['image']);
+            return apiResponse(200, $pages);
+        }
+        else{
+            return apiResponse(200,null,'Page tentang tidak ditemukan');
+        }
     }
 }

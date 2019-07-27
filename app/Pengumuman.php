@@ -3,12 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use TCG\Voyager\Facades\Voyager;
 
-class Slider extends Model
+
+class Pengumuman extends Model
 {
-    protected $table = 'slider';
-    protected $fillable = ['user_id', 'description', 'image', 'title'];
+    protected $table = 'pengumuman';
+    protected $fillable = ['user_id', 'description', 'title','image'];
 
     public function userId()
     {
@@ -24,4 +24,5 @@ class Slider extends Model
 
         parent::save();
     }
+
 }

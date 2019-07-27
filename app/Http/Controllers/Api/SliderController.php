@@ -17,6 +17,7 @@ class SliderController extends Controller
         $slider = new Slider();
         $slider = $slider->all()->map(function($value){
             return [
+                'title' => $value->title,
                 'deskripsi' => $value->description,
                 'image' => asset($value->image)
             ];

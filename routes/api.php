@@ -24,10 +24,15 @@ Route::group(['namespace' => 'Api'], function(){
 
     Route::group(['prefix' => 'pages'], function(){
         Route::get('/read', 'PagesController@read')->name('api.pages.read');
+        Route::get('/tentang', 'PagesController@tentang')->name('api.pages.tentang');
     });
 
     Route::group(['prefix' => 'download'], function(){
         Route::get('/', 'DownloadController@index')->name('api.download.index');
+    });
+
+    Route::group(['prefix' => 'galeri'], function(){
+        Route::get('/', 'GalleryController@index')->name('api.gallery.index');
     });
 
     Route::group(['prefix' => 'message'], function(){
@@ -51,6 +56,18 @@ Route::group(['namespace' => 'Api'], function(){
         Route::get('/', 'OpdController@index')->name('api.opd.index');
         // Route::get('/category', 'PostController@category')->name('api.opd.category');
         Route::get('/read', 'OpdController@read')->name('api.opd.read');
+        Route::get('/related', 'OpdController@related')->name('api.opd.related');
+
     });
+
+    Route::group(['prefix' => 'pengumuman'], function(){
+        Route::get('/', 'PengumumanController@index')->name('api.pengumuman.index');
+    });
+
+    Route::group(['prefix' => 'struktur-pemerintahan'], function(){
+        Route::get('/', 'StrukturPemerintahanController@index')->name('api.struktur-pemerintahan.index');
+    });
+
+
 
 });

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use TCG\Voyager\Facades\Voyager;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class Opd extends Model
 {
@@ -30,12 +30,13 @@ class Opd extends Model
         parent::save();
     }
 
-    // public static function getOpdListByCategory($category){
-    //     return (new static)::categoryId()->where('name',$category);
-    // }
-
     public function getOpdListByCategory($cat)
     {
         return $this->categoryId()->where('name','DINAS')->first();
+    }
+
+    public function scopePublished(Builder $query)
+    {
+        return $query->where('status','=','PUBLISHED');
     }
 }
