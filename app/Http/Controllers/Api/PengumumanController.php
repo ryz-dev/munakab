@@ -18,7 +18,7 @@ class PengumumanController extends Controller
 
         $pengumuman = $pengumuman->orderBy('created_at', 'DESC')
                                 ->paginate($limit);
-        $pengumuman = $pengumuman->map(function($value){
+        $pengumuman->getCollection()->transform(function($value){
             $value['image'] = asset($value['image']);
             $value['author'] = \DB::table('users')->where('id', $value->user_id)->first()->name;
             unset($value['id']);

@@ -15,10 +15,8 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $post = app()->make(Voyager::modelClass('Post'));
-        // if ($request->has('category')) {
-        //     $post->where('')
-        // }
-        $post = $post->published()->orderBy('created_at','DESC')->paginate($this->perPage);
+        $limit = $request->has('limit')?$request->limit:$this->perPage;
+        $post = $post->published()->orderBy('created_at','DESC')->paginate($limit);
 
         $post->getCollection()->transform(function($value){
             $value['author'] = \DB::table('users')->where('id', $value->author_id)->first()->name;
