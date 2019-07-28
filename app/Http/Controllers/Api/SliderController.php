@@ -16,7 +16,7 @@ class SliderController extends Controller
                 'title' => $value->title,
                 'deskripsi' => $value->description,
                 'image' => asset($value->image),
-                'link' => $value->lik
+                'link' => $value->link
             ];
         });
 
