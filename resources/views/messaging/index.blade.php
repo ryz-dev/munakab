@@ -119,7 +119,7 @@
                                                 </table>
                                             </div>
                                             <div class="row text-right">
-                                                <button class="btn btn-info">Balas</button>
+                                                <button class="btn btn-info btn-balas" data-nama-pelapor="{{ $item->fullname }}" data-email-pelapor="{{ $item->email }}" data-id="{{ $item->id }}">Balas</button>
                                                 <button class="btn btn-danger">Hapus</button>
                                             </div>
                                         </div>
@@ -173,4 +173,81 @@
         </div>
 
     </div>
+
+    <div class="modal modal-info fade" tabindex="-1" id="menu_item_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager::generic.close') }}"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="" id="m_form" method="POST"
+                      data-action-add="w"
+                      data-action-update="w">
+
+                    <input id="m_form_method" type="hidden" name="_method" value="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="id-messaging" name="id_messaging">
+                    <div class="modal-body">
+                        <h4 id="modal-title">..</h4>
+                        <br>
+                        <textarea required name="reply" class="form-control" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success pull-right delete-confirm__">Kirim</button>
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
+
+@section('javascript')
+<script>
+    var $m_modal       = $('#menu_item_modal');
+
+    $('.btn-balas').on('click', function(e){
+        e.preventDefault();
+        var namaPelapor = $(this).data('nama-pelapor');
+        var email = $(this).data('email-pelapor');
+        var id = $(this).data('id');
+
+        if (email == '' || email == undefined || email == false) {
+            alert('Pelapor tersebut tidak memiliki alamat email yang valid');
+        }else{
+            $('#modal-title').text('Balas pesan ke '+namaPelapor+' melalui alamat '+email);
+            $('#id-messaging').val(id);
+            $m_modal.modal('show');
+
+        }
+
+
+    });
+
+    $('#m_form').on('submit', function(e){
+        e.preventDefault();
+        $('#menu_item_modal').modal('hide');
+        $('#voyager-loader').show();
+        $.ajax({
+            method:'post',
+            url: "{{ route('admin.messaging.reply') }}",
+            data: $(this).serialize(),
+            success: function(res){
+
+                $('#voyager-loader').hide();
+                if (res.diagnostic.code == 200) {
+                    alert('Pesan berhasil dikirim');
+                    location.reload();
+                }
+                else{
+                    alert('Pesan Gagal dikirm');
+                    location.reload();
+                }
+            }
+
+        })
+        console.log();
+    });
+
+</script>
+@stop()
