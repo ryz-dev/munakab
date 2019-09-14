@@ -28,4 +28,11 @@ class PengumumanController extends Controller
 
         return apiResponse(200, $pengumuman);
     }
+
+    public function read($slug)
+    {
+        $pengumuman = Pengumuman::where('slug', $slug)->firstOrFail();
+
+        return apiResponse(200,$pengumuman);
+    }
 }

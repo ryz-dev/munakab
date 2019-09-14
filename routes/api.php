@@ -62,6 +62,7 @@ Route::group(['namespace' => 'Api'], function(){
 
     Route::group(['prefix' => 'pengumuman'], function(){
         Route::get('/', 'PengumumanController@index')->name('api.pengumuman.index');
+        Route::get('/read/{slug}', 'PengumumanController@read')->name('api.pengumuman.read');
     });
 
     Route::group(['prefix' => 'struktur-pemerintahan'], function(){
