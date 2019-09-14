@@ -32,6 +32,7 @@ class PengumumanController extends Controller
     public function read($slug)
     {
         $pengumuman = Pengumuman::where('slug', $slug)->firstOrFail();
+        $pengumuman->image = asset($pengumuman->image);
 
         return apiResponse(200,$pengumuman);
     }
