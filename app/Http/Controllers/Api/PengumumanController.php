@@ -21,7 +21,6 @@ class PengumumanController extends Controller
         $pengumuman->getCollection()->transform(function($value){
             $value['image'] = asset($value['image']);
             $value['author'] = \DB::table('users')->where('id', $value->user_id)->first()->name;
-            unset($value['id']);
             unset($value['user_id']);
             unset($value['updated_at']);
             return $value;
