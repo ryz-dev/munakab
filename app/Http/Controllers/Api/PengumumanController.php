@@ -19,7 +19,7 @@ class PengumumanController extends Controller
         $pengumuman = $pengumuman->orderBy('created_at', 'DESC')
                                 ->paginate($limit);
         $pengumuman->getCollection()->transform(function($value){
-            $value['image'] = asset($value['image']);
+            $value['image'] = asset('storage/'.$value['image']);
             $value['author'] = \DB::table('users')->where('id', $value->user_id)->first()->name;
             unset($value['user_id']);
             unset($value['updated_at']);
@@ -32,7 +32,7 @@ class PengumumanController extends Controller
     public function read($slug)
     {
         $pengumuman = Pengumuman::where('slug', $slug)->firstOrFail();
-        $pengumuman->image = asset($pengumuman->image);
+        $pengumuman->image = asset('storage/'.$pengumuman->image);
 
         return apiResponse(200,$pengumuman);
     }

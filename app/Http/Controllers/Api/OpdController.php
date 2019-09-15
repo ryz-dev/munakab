@@ -54,7 +54,7 @@ class OpdController extends Controller
 
             if ($related->count() > 0) {
                 $related = $related->get()->map(function($value){
-                    $value['image'] = asset($value['image']);
+                    $value['image'] = asset('storage/'.$value['image']);
                     $value['author'] = \DB::table('users')->where('id', $value['author_id'])->first()->name;
                     unset($value['author_id']);
                     unset($value['id']);

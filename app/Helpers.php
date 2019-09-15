@@ -102,7 +102,7 @@ if (!function_exists('databaseExceptionError')) {
 if (!function_exists('responseImage')) {
     function responseImage($data){
         if ($data) {
-            return asset($data);
+            return asset('storage/'.$data);
         }
 
         return null;

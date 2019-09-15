@@ -21,7 +21,7 @@ class PagesController extends Controller
             $author = \DB::table('users')->where('id', $pages['author_id'])->first()->name;
             unset($pages['author_id']);
             $pages['author'] = $author;
-            $pages['image'] = asset($pages['image']);
+            $pages['image'] = asset('storage/'.$pages['image']);
             return apiResponse(200,$pages);
         }
         else{
@@ -38,7 +38,7 @@ class PagesController extends Controller
             unset($pages['id']);
             unset($pages['author_id']);
             unset($pages['status']);
-            $pages['image'] = asset($pages['image']);
+            $pages['image'] = asset('storage/'.$pages['image']);
             return apiResponse(200, $pages);
         }
         else{

@@ -15,7 +15,7 @@ class SliderController extends Controller
             return [
                 'title' => $value->title,
                 'deskripsi' => $value->description,
-                'image' => asset($value->image),
+                'image' => asset('storage/'.$value->image),
                 'link' => $value->link
             ];
         });

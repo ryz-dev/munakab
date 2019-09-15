@@ -18,7 +18,7 @@ class StrukturPemerintahanController extends Controller
 
 
         $struktur->bawahan->map(function($value){
-            $value['image'] = asset($value['image']);
+            $value['image'] = asset('storage/'.$value['image']);
             return $value;
         });
 
