@@ -117,6 +117,6 @@ if (!function_exists('getUserNameById')) {
 
 if (!function_exists('getUserPictureById')) {
     function getUserPictureById($data){
-        return asset('storage/.'\DB::table('users')->where('id', $data)->first()->avatar);
+        return asset('storage/'.\DB::table('users')->where('id', $data)->first()->avatar);
     }
 }
