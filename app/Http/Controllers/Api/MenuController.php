@@ -12,6 +12,7 @@ use App\Opd;
 class MenuController extends Controller
 {
     public function index($type){
+        // dd('ff');
         $menus = Menu::where('name', $type)->with(['parent_items.children' => function ($q) {
             $q->orderBy('order');
         }])->first();
@@ -20,7 +21,6 @@ class MenuController extends Controller
 
             if ($value->children->count()) {
                 $value->children->map(function($value){
-                    self::unsetParam($value);
                     if ($value->route == 'api.opd.category') {
                         $opd = new Opd();
                         $category = app()->make(Voyager::modelClass('Category'));
@@ -34,6 +34,8 @@ class MenuController extends Controller
                         return $value;
                     }
 
+
+
                     if ($value->route && $value->url =="") {
                         // dd($value->parameters);
                         // self::unsetParam($value);
@@ -44,6 +46,7 @@ class MenuController extends Controller
                         // unset($value['created_at']);
                         // unset($value['updated_at']);
                         // dd($value);
+                        // dd($value->route);
                         $value->url = $this->customUrl($value->route, $value->parameters);
 
                         return $value;
