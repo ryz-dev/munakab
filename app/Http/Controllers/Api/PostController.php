@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $limit = $request->has('limit')?$request->limit:$this->perPage;
 
-        $category_id = \DB::table('categories')->where('name', $category);
+        $category_id = \DB::table('categories')->where('slug', $category);
 
         if ($category_id->first()) {
             $post = $post->where('category_id', $category_id->first()->id)
