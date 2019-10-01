@@ -18,11 +18,11 @@ class StrukturPemerintahanController extends Controller
 
 
         $struktur->bawahan->map(function($value){
-            // $value['image'] = asset('storage/'.$value['image']);
+            $value['image'] = asset('storage/'.$value['image']);
             return $value;
         });
 
-        // $struktur->image = asset('storage/'.$struktur['image']);
+        $struktur->image = asset('storage/'.$struktur['image']);
 
         return apiResponse(200, $struktur);
     }
