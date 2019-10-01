@@ -22,7 +22,7 @@ class StrukturPemerintahanController extends Controller
             return $value;
         });
 
-        $struktur->image = asset($struktur['image']);
+        $struktur->image = asset('storage/'.$struktur['image']);
 
         return apiResponse(200, $struktur);
     }
