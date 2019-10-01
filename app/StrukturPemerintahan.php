@@ -15,8 +15,8 @@ class StrukturPemerintahan extends Model
         return $this->hasMany('App\StrukturPemerintahan','atasan')->with('bawahan');
     }
 
-    public function getImageAttribute()
-    {
-        return asset('storage/', $this->image);
-    }
+    // public function getImageAttribute()
+    // {
+    //     return asset('storage/', $this->image);
+    // }
 }
