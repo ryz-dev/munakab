@@ -38,7 +38,7 @@ class GalleryController extends Controller
         $dir = $this->directory.'/'.$folder;
 
         $files = [];
-
+        // dd($request);
         $res = $this->getIndex($dir);
 
         return apiResponse(200,$res);
@@ -47,13 +47,24 @@ class GalleryController extends Controller
     private function getIndex($folder){
         $files = [];
         $thumbnails = [];
+        $limit = \Request::has('limit')?(int)\Request::get('limit'):null;
         $storage = Storage::disk($this->filesystem)->addPlugin(new ListWith());
         $storageItems = $storage->listWith(['mimetype'], $folder);
+        // dd($limit);
+
+        $i = 0;
 
         foreach ($storageItems as $item) {
             if ($item['type'] == 'dir') {
+
+                if ($limit) {
+                    continue;
+                }
+
                 $files[] = $this->getFolder($item);
             } else{
+                // dump($request->limit);
+                // $limit = $request->limit;
                 if (empty(pathinfo($item['path'], PATHINFO_FILENAME)) && !config('voyager.hidden_files')) {
                     continue;
                 }
@@ -64,6 +75,9 @@ class GalleryController extends Controller
                 }
 
                 $files[] = $this->getFiles($item);
+                $i++;
+                if($limit && $limit == $i)
+                    break;
             }
         }
 
