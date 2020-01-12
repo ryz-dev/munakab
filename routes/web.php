@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'Admin\MessagingController@reply');
+// Route::get('/', 'Admin\MessagingController@reply');
 
 
 Route::group(['prefix' => 'admin'], function () {
